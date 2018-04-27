@@ -20,14 +20,15 @@ public class Recipe implements Serializable {
     @ColumnInfo(name = "title")
     private String title;
 
-    @ColumnInfo(name = "image")
-    private String image;
+    @ColumnInfo(name = "images")
+    @TypeConverters(Image.Converter.class)
+    private List<Image> images;
 
     @ColumnInfo(name = "description")
     private String description;
 
     @ColumnInfo(name = "ingredients")
-    @TypeConverters(IngredientsConverter.class)
+    @TypeConverters(Ingredient.Converter.class)
     private List<Ingredient> ingredients;
 
 
@@ -47,12 +48,12 @@ public class Recipe implements Serializable {
         this.title = title;
     }
 
-    public String getImage() {
-        return image;
+    public List<Image> getImages() {
+        return images;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setImages(List<Image> images) {
+        this.images = images;
     }
 
     public String getDescription() {

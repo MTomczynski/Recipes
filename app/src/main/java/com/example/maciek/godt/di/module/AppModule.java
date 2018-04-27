@@ -35,7 +35,9 @@ public class AppModule {
     @Singleton
     @Provides
     public Database provideDatabase(Application application) {
-        return Room.databaseBuilder(application, Database.class, "recipes_db").build();
+        return Room.databaseBuilder(application, Database.class, "recipes_db")
+                .fallbackToDestructiveMigration() //
+                .build();
     }
 
     @Singleton

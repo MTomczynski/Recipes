@@ -14,16 +14,16 @@ import java.util.Collections;
 import java.util.List;
 
 @Entity(
-        tableName = "ingredient"
+        tableName = "image"
 )
-public class Ingredient implements Serializable {
+public class Image implements Serializable {
 
     @PrimaryKey
-    @ColumnInfo(name = "id")
+    @ColumnInfo(name = "imboId")
     private Integer id;
 
-    @ColumnInfo(name = "name")
-    private String name;
+    @ColumnInfo(name = "url")
+    private String url;
 
     public Integer getId() {
         return id;
@@ -33,12 +33,12 @@ public class Ingredient implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getUrl() {
+        return url;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public static class Converter {
@@ -46,20 +46,20 @@ public class Ingredient implements Serializable {
         private static Gson gson = new Gson();
 
         @TypeConverter
-        public static List<Ingredient> stringToIngredients(String data) {
+        public static List<Image> stringToImages(String data) {
             if(data == null) {
                 return Collections.emptyList();
             }
 
-            Type listType = new TypeToken<List<Ingredient>>() {}.getType();
+            Type listType = new TypeToken<List<Image>>() {}.getType();
 
             return gson.fromJson(data, listType);
         }
 
         @TypeConverter
-        public static String ingredientsToString(List<Ingredient> ingredients) {
-            return gson.toJson(ingredients);
+        public static String imagesToString(List<Image> images) {
+            return gson.toJson(images);
         }
-    }
 
+    }
 }

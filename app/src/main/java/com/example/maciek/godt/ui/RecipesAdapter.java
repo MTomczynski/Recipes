@@ -7,9 +7,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.maciek.godt.R;
+import com.example.maciek.godt.data.Image;
 import com.example.maciek.godt.data.Recipe;
 
 import java.util.ArrayList;
@@ -48,7 +51,11 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull RecipesAdapter.ViewHolder holder, int position) {
-        holder.recipeTitle.setText(recipes.get(position).getTitle());
+        Recipe recipe = recipes.get(position);
+        holder.recipeTitle.setText(recipe.getTitle());
+        List<Image> images = recipe.getImages();
+        if(images.size() > 0)
+            Glide.with(context).load(images.get(0).getUrl()).into(holder.recipeImage);
     }
 
     @Override
@@ -59,10 +66,12 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHold
     class ViewHolder extends RecyclerView.ViewHolder {
 
         private TextView recipeTitle;
+        private ImageView recipeImage;
 
         ViewHolder(View itemView) {
             super(itemView);
             recipeTitle = itemView.findViewById(R.id.recipe_title);
+            recipeImage = itemView.findViewById(R.id.recipe_image);
         }
     }
 }

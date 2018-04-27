@@ -20,6 +20,7 @@ import io.reactivex.schedulers.Schedulers;
 public class RecipesViewModel extends ViewModel {
 
     private static final String TAG = "RECIPES VIEW MODEL";
+    private static final int DEBOUNCE_TIMEOUT = 500;
 
     private final RecipesRepository recipesRepository;
 
@@ -60,7 +61,7 @@ public class RecipesViewModel extends ViewModel {
         recipesRepository.getRecipes()
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .debounce(500, TimeUnit.MILLISECONDS)
+                .debounce(DEBOUNCE_TIMEOUT, TimeUnit.MILLISECONDS)
                 .subscribe(disposableObserver);
     }
 

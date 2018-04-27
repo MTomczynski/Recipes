@@ -5,21 +5,20 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.util.Log;
-import android.widget.TextView;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.example.maciek.godt.R;
-import com.minimize.android.rxrecycleradapter.RxDataSource;
-import com.minimize.android.rxrecycleradapter.RxDataSourceSectioned;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import dagger.Provides;
 import dagger.android.AndroidInjection;
 
-public class RecipesActivity extends AppCompatActivity {
+public class RecipesActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
 
     public static final String TAG = "RECIPES ACTIVITY";
 
@@ -34,7 +33,14 @@ public class RecipesActivity extends AppCompatActivity {
     @BindView(R.id.recipes_recycler_view)
     RecyclerView recipesRecycler;
 
-
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.options_menu, menu);
+        MenuItem searchItem = menu.findItem(R.id.search);
+        SearchView searchView = (SearchView) searchItem.getActionView();
+        searchView.setOnQueryTextListener(this);
+        return true;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,5 +79,16 @@ public class RecipesActivity extends AppCompatActivity {
     public void onDestroy() {
         recipesViewModel.disposeElements();
         super.onDestroy();
+    }
+
+    @Override
+    public boolean onQueryTextChange(String query) {
+        // Here is where we are going to implement the filter logic
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
     }
 }
