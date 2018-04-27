@@ -13,14 +13,14 @@ import javax.inject.Inject;
 import io.reactivex.Observable;
 import io.reactivex.functions.Consumer;
 
-public class RecipeRepository {
+public class RecipesRepository {
 
 
     private final ApiInterface apiInterface;
     private final RecipesDao recipesDao;
 
     @Inject
-    public RecipeRepository(ApiInterface apiInterface, RecipesDao recipesDao) {
+    public RecipesRepository(ApiInterface apiInterface, RecipesDao recipesDao) {
         this.apiInterface = apiInterface;
         this.recipesDao = recipesDao;
     }

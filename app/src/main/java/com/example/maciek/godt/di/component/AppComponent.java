@@ -1,7 +1,6 @@
 package com.example.maciek.godt.di.component;
 
-import android.app.Application;
-
+import com.example.maciek.godt.RecipesApplication;
 import com.example.maciek.godt.di.module.AppModule;
 import com.example.maciek.godt.di.module.BuildersModule;
 import com.example.maciek.godt.di.module.NetModule;
@@ -16,5 +15,5 @@ import dagger.android.AndroidInjectionModule;
         modules = {AndroidInjectionModule.class, BuildersModule.class, AppModule.class, NetModule.class}
 )
 public interface AppComponent {
-    void inject(Application application);
+    void inject(RecipesApplication application);
 }

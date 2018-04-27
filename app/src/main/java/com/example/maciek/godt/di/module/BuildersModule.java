@@ -1,6 +1,6 @@
 package com.example.maciek.godt.di.module;
 
-import com.example.maciek.godt.ui.MainActivity;
+import com.example.maciek.godt.ui.RecipesActivity;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
@@ -9,6 +9,6 @@ import dagger.android.ContributesAndroidInjector;
 public abstract class BuildersModule {
 
     @ContributesAndroidInjector
-    abstract MainActivity contributeMainActivity();
+    abstract RecipesActivity contributeRecipesActivity();
 
 }

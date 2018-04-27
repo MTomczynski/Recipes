@@ -1,9 +1,13 @@
 package com.example.maciek.godt.di.module;
 
 import android.app.Application;
+import android.arch.lifecycle.ViewModelProvider;
 import android.arch.persistence.room.Room;
 
 import com.example.maciek.godt.data.source.local.Database;
+import com.example.maciek.godt.data.source.local.IngredientsDao;
+import com.example.maciek.godt.data.source.local.RecipesDao;
+import com.example.maciek.godt.ui.RecipesViewModelFactory;
 
 import javax.inject.Singleton;
 
@@ -33,13 +37,18 @@ public class AppModule {
 
     @Singleton
     @Provides
-    public Database provideRecipesDao(Database database) {
-        return (Database) database.recipesDao();
+    public RecipesDao provideRecipesDao(Database database) {
+        return database.recipesDao();
     }
 
     @Singleton
     @Provides
-    public Database provideIngredientsDao(Database database) {
-        return (Database) database.ingredientsDao();
+    public IngredientsDao provideIngredientsDao(Database database) {
+        return database.ingredientsDao();
+    }
+
+    @Provides
+    public ViewModelProvider.Factory provideRecipesViewModelFactory(RecipesViewModelFactory factory) {
+        return factory;
     }
 }

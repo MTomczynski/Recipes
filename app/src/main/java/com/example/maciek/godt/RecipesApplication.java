@@ -13,7 +13,7 @@ import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.HasActivityInjector;
 
-public class MainApplication extends Application implements HasActivityInjector {
+public class RecipesApplication extends Application implements HasActivityInjector {
 
     @Inject
     public DispatchingAndroidInjector<Activity> activityInjector;
@@ -21,7 +21,6 @@ public class MainApplication extends Application implements HasActivityInjector 
     @Override
     public void onCreate() {
         super.onCreate();
-
         DaggerAppComponent.builder()
                 .appModule(new AppModule(this))
                 .netModule(new NetModule(BuildConfig.URL))
