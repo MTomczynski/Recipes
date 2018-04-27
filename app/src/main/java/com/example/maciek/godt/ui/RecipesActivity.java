@@ -3,6 +3,7 @@ package com.example.maciek.godt.ui;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.TextView;
 
 import com.example.maciek.godt.R;
@@ -44,9 +45,7 @@ public class RecipesActivity extends AppCompatActivity {
                 });
 
         recipesViewModel.recipesError().observe(this,
-                error -> {
-                    helloTv.setText(error);
-                });
+                error -> Log.e("Recipes activity", error));
     }
 
     @Override

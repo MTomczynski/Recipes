@@ -5,6 +5,7 @@ import android.util.Log;
 import com.example.maciek.godt.data.Recipe;
 import com.example.maciek.godt.data.source.local.RecipesDao;
 import com.example.maciek.godt.data.source.remote.ApiInterface;
+import com.example.maciek.godt.utils.Utils;
 
 import java.util.List;
 
@@ -18,21 +19,26 @@ public class RecipesRepository {
 
     private final ApiInterface apiInterface;
     private final RecipesDao recipesDao;
+    private final Utils utils;
 
     @Inject
-    public RecipesRepository(ApiInterface apiInterface, RecipesDao recipesDao) {
+    public RecipesRepository(ApiInterface apiInterface, RecipesDao recipesDao, Utils utils) {
         this.apiInterface = apiInterface;
         this.recipesDao = recipesDao;
+        this.utils = utils;
     }
 
     public Observable<List<Recipe>> getRecipes() {
-        return Observable.concatArrayEager(getRecipesFromApi(), getRecipesFromDb());
+        if(utils.isOnline())
+            return Observable.concatArrayEager(getRecipesFromApi(), getRecipesFromDb());
+        else
+            return getRecipesFromDb();
     }
 
     private Observable<List<Recipe>> getRecipesFromApi() {
         return apiInterface.getRecipes("0")
                 .doOnNext((recipes) -> {
-                    Log.e("REPOSITORY API ******", String.valueOf(recipes.size()));
+                    Log.d("REPOSITORY API", String.valueOf(recipes.size()));
                     for(Recipe recipe : recipes) {
                         recipesDao.insertRecipe(recipe);
                     }
@@ -43,7 +49,7 @@ public class RecipesRepository {
         return recipesDao.queryRecipes()
                 .toObservable()
                 .doOnNext((recipes) -> {
-                    Log.e("REPOSITORY DB *******", String.valueOf(recipes.size()));
+                    Log.d("REPOSITORY DB", String.valueOf(recipes.size()));
                 });
     }
 
