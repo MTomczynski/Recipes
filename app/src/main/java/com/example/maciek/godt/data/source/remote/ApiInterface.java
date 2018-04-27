@@ -1,6 +1,6 @@
-package com.example.maciek.godt.api;
+package com.example.maciek.godt.data.source.remote;
 
-import com.example.maciek.godt.model.Recipe;
+import com.example.maciek.godt.data.Recipe;
 
 import java.util.List;
 

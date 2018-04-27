@@ -1,18 +1,15 @@
-package com.example.maciek.godt;
+package com.example.maciek.godt.ui;
 
-import android.arch.persistence.room.OnConflictStrategy;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
-import com.example.maciek.godt.api.ApiClient;
-import com.example.maciek.godt.api.ApiInterface;
-import com.example.maciek.godt.model.Recipe;
-import com.example.maciek.godt.model.RecipeResponse;
+import com.example.maciek.godt.R;
+import com.example.maciek.godt.data.source.remote.ApiInterface;
+import com.example.maciek.godt.data.Recipe;
 
 import java.util.List;
 
-import dagger.android.AndroidInjection;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;

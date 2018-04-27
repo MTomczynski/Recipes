@@ -1,7 +1,8 @@
-package com.example.maciek.godt.model;
+package com.example.maciek.godt.data;
 
 import android.arch.persistence.room.TypeConverter;
 
+import com.example.maciek.godt.data.Ingredient;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 

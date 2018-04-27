@@ -1,4 +1,4 @@
-package com.example.maciek.godt.model;
+package com.example.maciek.godt.data;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
