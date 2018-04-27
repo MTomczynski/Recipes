@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.maciek.godt.R;
+import com.example.maciek.godt.data.Recipe;
 
 import javax.inject.Inject;
 
@@ -83,8 +84,9 @@ public class RecipesActivity extends AppCompatActivity implements SearchView.OnQ
 
     @Override
     public boolean onQueryTextChange(String query) {
-        // Here is where we are going to implement the filter logic
-        return false;
+        adapter.getFilter().filter(query);
+        recipesRecycler.scrollToPosition(0);
+        return true;
     }
 
     @Override
