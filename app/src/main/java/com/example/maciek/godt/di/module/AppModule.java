@@ -8,6 +8,7 @@ import android.content.Context;
 import com.example.maciek.godt.data.source.local.Database;
 import com.example.maciek.godt.data.source.local.IngredientsDao;
 import com.example.maciek.godt.data.source.local.RecipesDao;
+import com.example.maciek.godt.ui.RecipesAdapter;
 import com.example.maciek.godt.ui.RecipesViewModelFactory;
 import com.example.maciek.godt.utils.Utils;
 
@@ -51,8 +52,8 @@ public class AppModule {
 
     @Singleton
     @Provides
-    public Utils provideUtils(Context context) {
-        return new Utils(context);
+    public Utils provideUtils() {
+        return new Utils(application);
     }
 
     @Provides
@@ -60,4 +61,9 @@ public class AppModule {
         return factory;
     }
 
+    @Singleton
+    @Provides
+    public RecipesAdapter provideRecipesAdapter() {
+        return new RecipesAdapter(application);
+    }
 }

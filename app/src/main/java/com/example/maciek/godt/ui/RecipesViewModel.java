@@ -19,6 +19,8 @@ import io.reactivex.schedulers.Schedulers;
 
 public class RecipesViewModel extends ViewModel {
 
+    private static final String TAG = "RECIPES VIEW MODEL";
+
     private final RecipesRepository recipesRepository;
 
     private MutableLiveData<List<Recipe>> recipesResult = new MutableLiveData<>();
@@ -52,7 +54,7 @@ public class RecipesViewModel extends ViewModel {
 
             @Override
             public void onComplete() {
-                Log.d("RECIPES VIEW MODEL", "Recipes loaded!");
+                Log.d(TAG, "Recipes loaded!");
             }
         };
         recipesRepository.getRecipes()

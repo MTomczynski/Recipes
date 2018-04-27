@@ -17,6 +17,8 @@ import io.reactivex.functions.Consumer;
 public class RecipesRepository {
 
 
+    private static final String TAG = "RECIPES REPOSITORY";
+
     private final ApiInterface apiInterface;
     private final RecipesDao recipesDao;
     private final Utils utils;
@@ -38,7 +40,7 @@ public class RecipesRepository {
     private Observable<List<Recipe>> getRecipesFromApi() {
         return apiInterface.getRecipes("0")
                 .doOnNext((recipes) -> {
-                    Log.d("REPOSITORY API", String.valueOf(recipes.size()));
+                    Log.d(TAG, String.valueOf(recipes.size()));
                     for(Recipe recipe : recipes) {
                         recipesDao.insertRecipe(recipe);
                     }
@@ -49,7 +51,7 @@ public class RecipesRepository {
         return recipesDao.queryRecipes()
                 .toObservable()
                 .doOnNext((recipes) -> {
-                    Log.d("REPOSITORY DB", String.valueOf(recipes.size()));
+                    Log.d(TAG, String.valueOf(recipes.size()));
                 });
     }
 
