@@ -23,9 +23,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
 public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHolder> implements Filterable {
 
     private Context context;
@@ -58,9 +55,26 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHold
     public void onBindViewHolder(@NonNull RecipesAdapter.ViewHolder holder, int position) {
         Recipe recipe = filtered.get(position);
         holder.recipeTitle.setText(recipe.getTitle());
+
+        int index = 0;
+        StringBuilder ingredients = new StringBuilder();
+        for(Ingredient ingredient : recipe.getIngredients()) {
+            if(!ingredient.getName().isEmpty()) {
+                if(index > 0) ingredients.append(", ");
+                ingredients.append(ingredient.getName());
+                index++;
+            }
+
+        }
+        holder.recipeIngredients.setText(ingredients.toString());
+
         List<Image> images = recipe.getImages();
+
         if(images.size() > 0)
             Glide.with(context).load(images.get(0).getUrl()).into(holder.recipeImage);
+        else
+            Glide.with(context).load(R.drawable.placeholder).into(holder.recipeImage);
+
     }
 
     @Override
@@ -113,11 +127,13 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHold
     class ViewHolder extends RecyclerView.ViewHolder {
 
         private TextView recipeTitle;
+        private TextView recipeIngredients;
         private ImageView recipeImage;
 
         ViewHolder(View itemView) {
             super(itemView);
             recipeTitle = itemView.findViewById(R.id.recipe_title);
+            recipeIngredients = itemView.findViewById(R.id.recipe_ingredients);
             recipeImage = itemView.findViewById(R.id.recipe_image);
         }
     }
