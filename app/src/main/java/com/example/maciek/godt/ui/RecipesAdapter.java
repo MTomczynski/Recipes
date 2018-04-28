@@ -114,7 +114,7 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHold
         return filtered.get(position).getId();
     }
 
-    public List<Recipe> getFilteredResults(String constraint) {
+    private List<Recipe> getFilteredResults(String constraint) {
         List<Recipe> results = new ArrayList<>();
         for(Recipe recipe : recipes) {
             boolean shouldAdd = false;

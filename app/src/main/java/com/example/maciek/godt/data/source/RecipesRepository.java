@@ -38,7 +38,7 @@ public class RecipesRepository {
     }
 
     private Observable<List<Recipe>> getRecipesFromApi() {
-        return apiInterface.getRecipes("0")
+        return apiInterface.getRecipes()
                 .doOnNext((recipes) -> {
                     Log.d(TAG, String.valueOf(recipes.size()));
                     for(Recipe recipe : recipes) {
@@ -50,9 +50,7 @@ public class RecipesRepository {
     private Observable<List<Recipe>> getRecipesFromDb() {
         return recipesDao.queryRecipes()
                 .toObservable()
-                .doOnNext((recipes) -> {
-                    Log.d(TAG, String.valueOf(recipes.size()));
-                });
+                .doOnNext((recipes) -> Log.d(TAG, String.valueOf(recipes.size())));
     }
 
 }

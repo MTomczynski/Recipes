@@ -3,10 +3,8 @@ package com.example.maciek.godt.di.module;
 import android.app.Application;
 import android.arch.lifecycle.ViewModelProvider;
 import android.arch.persistence.room.Room;
-import android.content.Context;
 
 import com.example.maciek.godt.data.source.local.Database;
-import com.example.maciek.godt.data.source.local.IngredientsDao;
 import com.example.maciek.godt.data.source.local.RecipesDao;
 import com.example.maciek.godt.ui.RecipesAdapter;
 import com.example.maciek.godt.ui.RecipesViewModelFactory;
@@ -44,12 +42,6 @@ public class AppModule {
     @Provides
     public RecipesDao provideRecipesDao(Database database) {
         return database.recipesDao();
-    }
-
-    @Singleton
-    @Provides
-    public IngredientsDao provideIngredientsDao(Database database) {
-        return database.ingredientsDao();
     }
 
     @Singleton
