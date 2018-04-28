@@ -95,7 +95,7 @@ public class RecipesActivity extends AppCompatActivity implements SearchView.OnQ
     @Override
     public boolean onQueryTextChange(String query) {
         adapter.getFilter().filter(query);
-        recipesRecycler.smoothScrollToPosition(0);
+        recipesRecycler.scrollToPosition(0);
         return true;
     }
 

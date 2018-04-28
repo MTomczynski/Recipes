@@ -32,13 +32,15 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHold
     @Inject
     public RecipesAdapter(Context context) {
         this.context = context;
+        setHasStableIds(true);
     }
 
     public void setRecipes(@Nullable List<Recipe> recipes) {
         if(recipes == null) return;
         this.recipes.clear();
         this.recipes.addAll(recipes);
-        this.filtered.addAll(recipes);
+        filtered.clear();
+        filtered.addAll(recipes);
         notifyDataSetChanged();
     }
 
@@ -105,6 +107,11 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHold
                 notifyDataSetChanged();
             }
         };
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return filtered.get(position).getId();
     }
 
     public List<Recipe> getFilteredResults(String constraint) {
