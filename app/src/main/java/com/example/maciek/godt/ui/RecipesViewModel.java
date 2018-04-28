@@ -20,7 +20,7 @@ import io.reactivex.schedulers.Schedulers;
 public class RecipesViewModel extends ViewModel {
 
     private static final String TAG = "RECIPES VIEW MODEL";
-    private static final int DEBOUNCE_TIMEOUT = 500;
+    private static final int DEBOUNCE_TIMEOUT = 150;
 
     private final RecipesRepository recipesRepository;
 

@@ -1,7 +1,6 @@
 package com.example.maciek.godt.data.source.local;
 
 import android.arch.persistence.room.RoomDatabase;
-import android.arch.persistence.room.migration.Migration;
 
 import com.example.maciek.godt.data.Image;
 import com.example.maciek.godt.data.Ingredient;

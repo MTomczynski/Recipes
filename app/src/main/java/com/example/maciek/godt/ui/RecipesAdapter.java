@@ -66,7 +66,6 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHold
                 ingredients.append(ingredient.getName());
                 index++;
             }
-
         }
         holder.recipeIngredients.setText(ingredients.toString());
 

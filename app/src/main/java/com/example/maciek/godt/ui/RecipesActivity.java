@@ -2,11 +2,11 @@ package com.example.maciek.godt.ui;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
+import android.support.test.espresso.idling.CountingIdlingResource;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.util.Log;
@@ -37,6 +37,7 @@ public class RecipesActivity extends AppCompatActivity implements SearchView.OnQ
     @BindView(R.id.recipes_recycler_view)
     RecyclerView recipesRecycler;
 
+    CountingIdlingResource idlingResource = new CountingIdlingResource("DATA_LOADER");
 
 
     @Override
@@ -76,11 +77,13 @@ public class RecipesActivity extends AppCompatActivity implements SearchView.OnQ
         recipesViewModel = ViewModelProviders.of(this, recipesViewModelFactory)
             .get(RecipesViewModel.class);
 
+        idlingResource.increment();
         recipesViewModel.loadRecipes();
-
         recipesViewModel.recipesResult().observe(this,
-                recipes -> adapter.setRecipes(recipes));
-
+                recipes -> {
+                    adapter.setRecipes(recipes);
+                    idlingResource.decrement();
+                });
         recipesViewModel.recipesError().observe(this,
                 error -> Log.e(TAG, error));
     }
